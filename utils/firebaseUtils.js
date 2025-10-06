@@ -1,12 +1,12 @@
 // const firebaseAdmin = require('firebase-admin');
-const cloudinary = require('cloudinary').v2;
-const config = require('../config/index')
+// const cloudinary = require('cloudinary').v2;
+// const config = require('../config/index')
 
 // let firebaseApp = null;
 // let isFirebaseEnabled = false;
 // let bucket = null
 
-// 取環境設定（避免直接 JSON.parse 出錯）
+// // 取環境設定（避免直接 JSON.parse 出錯）
 // let serviceAccount = null;
 // try {
 //   serviceAccount = config.get('secret.firebase.serviceAccount');
@@ -33,28 +33,3 @@ const config = require('../config/index')
 //   bucket,
 //   isFirebaseEnabled,
 // };
-
-let isCloudinaryEnabled = false;
-
-try {
-  const cloudConfig = config.get('secret.cloudinary');
-
-  if (cloudConfig && cloudConfig.cloud_name) {
-    cloudinary.config({
-      cloud_name: cloudConfig.cloud_name,
-      api_key: cloudConfig.api_key,
-      api_secret: cloudConfig.api_secret,
-    });
-    isCloudinaryEnabled = true;
-    console.info('✅ Cloudinary 已初始化');
-  } else {
-    console.warn('⚠️ Cloudinary 未設定完整環境變數');
-  }
-} catch (err) {
-  console.warn('⚠️ Cloudinary 初始化失敗：', err.message);
-}
-
-module.exports = {
-  cloudinary,
-  isCloudinaryEnabled,
-};
